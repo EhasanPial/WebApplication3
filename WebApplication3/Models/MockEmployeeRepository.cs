@@ -7,8 +7,8 @@
         {
             employees = new List<Employee>()
             {
-                new Employee(){ Id = 1, Name = "Pial"},
-                new Employee(){ Id = 2, Name = "Subah"}
+                new Employee(){ Id = 1, Name = "Pial",Department ="CSE", Email="pialkhanpial@gmail.com"},
+                new Employee(){ Id = 2, Name = "Subah",Department ="CSE", Email="subahpial@gmail.com"}
             };
         }
         public Employee GetEmployee(int id)
