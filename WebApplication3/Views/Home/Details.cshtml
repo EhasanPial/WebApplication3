@@ -4,10 +4,12 @@
 @*// View Model dara data access*@
 @model WebApplication3.ViewModels.HomeDetailsViewModel 
 
-<html  xmlns="http://w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+    ViewBag.Title = "Employee Details";
+}
+
+
 <body>
     <h1>@ViewData["PageTitle"]</h1>
     <h1>@ViewBag.PageTitle</h1>

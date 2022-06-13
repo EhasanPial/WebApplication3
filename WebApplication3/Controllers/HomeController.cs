@@ -16,9 +16,10 @@ namespace WebApplication3.Controllers
         }
 
         // Index() handle incoming HTTP request 
-        public string Index()
+        public ViewResult Index()
         {
-            return _employeeRepository.GetEmployee(1).Name;
+             var model = _employeeRepository.GetAll();
+            return View(model);
         } 
 
         // Controller Builds the model er por eta view e pathabe
