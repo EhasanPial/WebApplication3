@@ -2,57 +2,69 @@
 @*eta dey hoy ei jonne je, jate @Model jokhn use korbo tkhn jate suggestion pai*@
 
 @*// View Model dara data access*@
-@model WebApplication3.ViewModels.HomeDetailsViewModel 
+@model HomeDetailsViewModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml"; 
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+    // ei khane ei vabe shared layout ta use krte pari
+    // ekhn dhoro _Layout file ta change kore onno layout file disi
+    // like _NewLayout . ekhn tahole sob view (.cshtml) e jeye nam 
+    //change korte hobe! ei jonne _viewStart use kora hy jate 
+    // jst ek jaygay change korar lage. _viewStart agei complime hobe onno 
+    //view er theke
+
+    /// but but but eikhaneo jdi Layout property use kori
+    /// tahole er priority beshi thakbe
+    /// 
     ViewBag.Title = "Employee Details";
 }
 
+<h1>@ViewData["PageTitle"]</h1>
+<h1>@ViewBag.PageTitle</h1>
+<h1>@Model.PageTitle</h1>
+@*  at the rate diye C# code bojhay and multiple code likhte hole curly brace dite hobe *@
+@{
+    var employee = ViewData["Employee"] as WebApplication3.Models.Employee; @*int string egula bade hole type cast korte hobe*@
+}
+@*<div>
 
-<body>
-    <h1>@ViewData["PageTitle"]</h1>
-    <h1>@ViewBag.PageTitle</h1>
-    <h1>@Model.PageTitle</h1>
-    @*  at the rate diye C# code bojhay and multiple code likhte hole curly brace dite hobe *@
-    @{
-        var employee = ViewData["Employee"] as WebApplication3.Models.Employee ;
+    Name : @employee.Name <br />
+    Email : @employee.Email <br />
+    Dept : @employee.Department
+</div>*@
 
-        
-    }
-    <div>
-        Name : @employee.Name <br />
-        Email : @employee.Email <br />
-        Dept : @employee.Department
-    </div>
-     <div>
-        Name : @ViewBag.Employee.Name  <br />
-        Email : @ViewBag.Employee.Email <br />
-        Dept : @ViewBag.Employee.Department
-    </div>
-    
-    @*eta Model er jonne, mane direct deatils theke object pass korchi*@
-    @*<div>
-        Name : @Model.Name <br />
-        Email : @Model.Email <br />
-        Dept : @Model.Department
+@*<div>
+    Name : @ViewBag.Employee.Name  <br />
+    Email : @ViewBag.Employee.Email <br />
+    Dept : @ViewBag.Employee.Department
+</div>*@
+
+@*eta Model er jonne, mane direct deatils theke object pass korchi*@
+
+@*<div>
+    Name : @Model.Name <br />
+    Email : @Model.Email <br />
+    Dept : @Model.Department
     </div>*@
-    
-    <div>
-        Name : @Model.Employee.Name <br />
-        Email : @Model.Employee.Email <br />
-        Dept : @Model.Employee.Department
 
-</body>
-</html>
+<div>
+    Name : @Model.Employee.Name <br />
+    Email : @Model.Employee.Email <br />
+    Dept : @Model.Employee.Department
+</div>
+
+@section Scripts {
+<script scr="~/js/CustomJavaScript.js"></script>
+}
+
 
 @*
-// protita controller er jonne ekta kore folder thakbe.
-// HTML + C# code, ek sathe use kora jay ekta page e , etai holo
-// Razor View
-//View Data --- Key value pari. key holo String type, Runtime e error dhorte pare. complie time e vul dhorte pare na
+    // protita controller er jonne ekta kore folder thakbe.
+    // HTML + C# code, ek sathe use kora jay ekta page e , etai holo
+    // Razor View
+    //View Data --- Key value pari. key holo String type, Runtime e error dhorte pare. complie time e vul dhorte pare na
 
-//ViewBag -- etap complie time e error dhorte pare na. eta just dynamic property user kore rather then key value pair
+    //ViewBag -- etap complie time e error dhorte pare na. eta just dynamic property user kore rather then key value pair
 
 
 *@

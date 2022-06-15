@@ -10,22 +10,25 @@ namespace WebApplication3.Controllers
 
         // Dependency Injection
         public HomeController(IEmployeeRepository employeeRepository)
-        { 
+        {
             // Contructor Injection
             _employeeRepository = employeeRepository;
         }
 
         // Index() handle incoming HTTP request 
+        [Route("")] // root
+        [Route("Home")] // localhost:5000/home
+        [Route("Home/Index")]  // localhost:5000/home/index
         public ViewResult Index()
         {
-             var model = _employeeRepository.GetAll();
+            var model = _employeeRepository.GetAll();
             return View(model);
-        } 
+        }
 
         // Controller Builds the model er por eta view e pathabe
-        public ViewResult Details()
+        public ViewResult Details(int id)
         {
-            Employee employee =  _employeeRepository.GetEmployee(1);
+            Employee employee = _employeeRepository.GetEmployee(id);
             // data pass kortechi.
             // 1. ViewData diye data pass - jeta key,value er mto. mane dictonary
             ViewData["Employee"] = employee;
@@ -46,7 +49,7 @@ namespace WebApplication3.Controllers
             //jeta ViewModel
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = _employeeRepository.GetEmployee(1),
+                Employee = _employeeRepository.GetEmployee(id),
                 PageTitle = "Employee Details"
 
             };

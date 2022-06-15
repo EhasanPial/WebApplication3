@@ -7,8 +7,17 @@
 </head>
 <body>
     <div>
-       @* eikhane onno view gulo ashe boshbe*@
+        @* eikhane onno view gulo ashe boshbe*@
         @RenderBody()
     </div>
+    @*  <script scr="~/js/CustomJavaScript.js"></script>*@
+
+    @if (IsSectionDefined("Scripts"))
+    {
+        @RenderSection("Scripts", required:true) 
+         
+    }
+
+
 </body>
 </html>
