@@ -8,14 +8,14 @@
     // Layout = "~/Views/Shared/_Layout.cshtml";
     // ei khane ei vabe shared layout ta use krte pari
     // ekhn dhoro _Layout file ta change kore onno layout file disi
-    // like _NewLayout . ekhn tahole sob view (.cshtml) e jeye nam 
-    //change korte hobe! ei jonne _viewStart use kora hy jate 
-    // jst ek jaygay change korar lage. _viewStart agei complime hobe onno 
+    // like _NewLayout . ekhn tahole sob view (.cshtml) e jeye nam
+    //change korte hobe! ei jonne _viewStart use kora hy jate
+    // jst ek jaygay change korar lage. _viewStart agei complime hobe onno
     //view er theke
 
     /// but but but eikhaneo jdi Layout property use kori
     /// tahole er priority beshi thakbe
-    /// 
+    ///
     ViewBag.Title = "Employee Details";
 }
 
@@ -24,20 +24,20 @@
 <h1>@Model.PageTitle</h1>
 @*  at the rate diye C# code bojhay and multiple code likhte hole curly brace dite hobe *@
 @{
-    var employee = ViewData["Employee"] as WebApplication3.Models.Employee; @*int string egula bade hole type cast korte hobe*@
+            /*var employee = ViewData["Employee"] as WebApplication3.Models.Employee;*/ @*int string egula bade hole type cast korte hobe*@
 }
 @*<div>
 
     Name : @employee.Name <br />
     Email : @employee.Email <br />
     Dept : @employee.Department
-</div>*@
+    </div>*@
 
 @*<div>
     Name : @ViewBag.Employee.Name  <br />
     Email : @ViewBag.Employee.Email <br />
     Dept : @ViewBag.Employee.Department
-</div>*@
+    </div>*@
 
 @*eta Model er jonne, mane direct deatils theke object pass korchi*@
 
@@ -46,11 +46,38 @@
     Email : @Model.Email <br />
     Dept : @Model.Department
     </div>*@
-
-<div>
+@*
+    <div>
     Name : @Model.Employee.Name <br />
     Email : @Model.Employee.Email <br />
     Dept : @Model.Employee.Department
+    </div>*@
+
+
+
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Employee.Name</h1>
+            </div>
+
+            <div class="card-body text-center">
+                <img src="~/images/dog.jpg"
+                     asp-append-version="true" />
+                <h4>Employee ID : @Model.Employee.Id</h4>
+                <h4>Email : @Model.Employee.Email</h4>
+                <h4>Department : @Model.Employee.Department</h4>
+
+            </div>
+            <div class="card-footer text-center">
+                <a href="#" class="btn btn-primary">Back</a>
+                <a href="#" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

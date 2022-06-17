@@ -2,8 +2,9 @@
 using WebApplication3.Models;
 using WebApplication3.ViewModels;
 
-namespace WebApplication3.Controllers
+namespace WebApplication3.wwwroot.Controllers
 {
+    [Route("[controller]")]
     public class HomeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -16,19 +17,22 @@ namespace WebApplication3.Controllers
         }
 
         // Index() handle incoming HTTP request 
-        [Route("")] // root
-        [Route("Home")] // localhost:5000/home
-        [Route("Home/Index")]  // localhost:5000/home/index
+        [Route("~/")] // "localhost:5000/"   // root of website
+        [Route("")] // "localhost:5000/home" [Route("/Home")]  
+        [Route("[action]")]  // localhost:5000/home/index
         public ViewResult Index()
         {
             var model = _employeeRepository.GetAll();
             return View(model);
         }
 
+
+
+        [Route("Details/{id?}")]
         // Controller Builds the model er por eta view e pathabe
-        public ViewResult Details(int id)
+        public ViewResult Details(int? id)
         {
-            Employee employee = _employeeRepository.GetEmployee(id);
+            Employee employee = _employeeRepository.GetEmployee(id ?? 1);
             // data pass kortechi.
             // 1. ViewData diye data pass - jeta key,value er mto. mane dictonary
             ViewData["Employee"] = employee;
@@ -49,7 +53,7 @@ namespace WebApplication3.Controllers
             //jeta ViewModel
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = _employeeRepository.GetEmployee(id),
+                Employee = _employeeRepository.GetEmployee(id ?? 1),
                 PageTitle = "Employee Details"
 
             };

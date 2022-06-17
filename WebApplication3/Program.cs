@@ -6,12 +6,14 @@ builder.Services.AddMvc().AddXmlSerializerFormatters();
 builder.Services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
 var app = builder.Build();
 
-
+app.UseStaticFiles();
 app.UseRouting();
-// app.UseMvcWithDefaultRoute();
-/*app.UseEndpoints(Routes =>
-{
-    Routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-});*/
-app.UseMvcWithDefaultRoute();
+app.MapControllers(); // for attribute routing
+
+
+// for conventional routing
+/*app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");*/
 app.Run();
+ 
