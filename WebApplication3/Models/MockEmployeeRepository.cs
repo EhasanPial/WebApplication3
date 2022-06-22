@@ -2,14 +2,21 @@
 {
     public class MockEmployeeRepository : IEmployeeRepository
     {
-        public List<Employee> employees;
+        private List<Employee> employees;
         public MockEmployeeRepository()
         {
             employees = new List<Employee>()
             {
-                new Employee(){ Id = 1, Name = "Roni",Department ="CSE", Email="pialkhanpial@gmail.com"},
-                new Employee(){ Id = 2, Name = "Roni2",Department ="CSE", Email="subahpial@gmail.com"}
+                new Employee(){ Id = 1, Name = "Roni",Department =Dept.HR, Email="pialkhanpial@gmail.com"},
+                new Employee(){ Id = 2, Name = "Roni2",Department =Dept.IT, Email="subahpial@gmail.com"}
             };
+        }
+
+        public Employee Add(Employee employee)
+        {
+             employee.Id = employees.Max(e => e.Id) + 1;
+             employees.Add(employee);
+             return employee;
         }
 
         public IEnumerable<Employee> GetAll()

@@ -59,5 +59,27 @@ namespace WebApplication3.wwwroot.Controllers
             };
             return View(homeDetailsViewModel);
         }
+
+        [Route("Create")]
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View();
+        }
+        [Route("Create")]
+        [HttpPost]
+        public IActionResult Create(Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                Employee newEmployee = _employeeRepository.Add(employee);
+                return RedirectToAction("Details", new { id = newEmployee.Id });
+
+            }
+
+            return View();
+
+
+        }
     }
 }
