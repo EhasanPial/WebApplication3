@@ -54,7 +54,8 @@ namespace WebApplication3.wwwroot.Controllers
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
                 Employee = _employeeRepository.GetEmployee(id ?? 1),
-                PageTitle = "Employee Details"
+                PageTitle = "Employee Details",
+
 
             };
             return View(homeDetailsViewModel);
@@ -66,6 +67,7 @@ namespace WebApplication3.wwwroot.Controllers
         {
             return View();
         }
+
         [Route("Create")]
         [HttpPost]
         public IActionResult Create(Employee employee)
@@ -81,5 +83,48 @@ namespace WebApplication3.wwwroot.Controllers
 
 
         }
+
+        [Route("Edit")]
+        [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            Employee employee = _employeeRepository.GetEmployee(id);
+            EmployeeEditViewModel editViewModel = new EmployeeEditViewModel
+            {
+                Id = id,
+                Name = employee.Name,
+                Email = employee.Email,
+                Department = employee.Department,
+                PhotoPath  = employee.PhotoPath
+                
+            };
+            return View(editViewModel);
+        }
+
+
+        [Route("Edit")]
+        [HttpPost]
+        public IActionResult Edit(EmployeeEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                Employee employee = _employeeRepository.GetEmployee(model.Id);
+                employee.Email = model.Email;
+                employee.Department = model.Department;
+                employee.PhotoPath = model.PhotoPath;
+                employee.Name = model.Name;
+ 
+                _employeeRepository.Update(employee);
+                return RedirectToAction("index", new { id = employee.Id });
+                
+            }
+
+            return View();
+
+
+        }
+
+
     }
 }

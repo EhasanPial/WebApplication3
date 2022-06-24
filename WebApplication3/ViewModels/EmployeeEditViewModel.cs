@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebApplication3.Models;
 
-namespace WebApplication3.Models
+namespace WebApplication3.ViewModels
 {
-    public class Employee
+    public class EmployeeEditViewModel
     {
         public int Id { get; set; }
 
@@ -16,6 +17,6 @@ namespace WebApplication3.Models
         [Display(Name = "Office Email")]
         public string Email { get; set; }
         public Dept Department { get; set; }
-        public string PhotoPath { get; set; }   
+        public string PhotoPath { get; set; }
     }
 }

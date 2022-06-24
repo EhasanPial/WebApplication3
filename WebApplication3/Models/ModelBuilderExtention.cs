@@ -6,14 +6,16 @@ namespace WebApplication3.Models
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>().HasData(
+            /*modelBuilder.Entity<Employee>().HasData(
 
                 new Employee
                 {
                     Id = 1,
                     Name = "Marry",
                     Department = Dept.HR,
-                    Email = "mark@g.com"
+                    Email = "mark@g.com",
+                    PhotoPat = "null"
+                   
                 },
                 new Employee
                 {
@@ -21,9 +23,10 @@ namespace WebApplication3.Models
                     Name = "Jon",
                     Department = Dept.IT,
                     Email = "jon@g.com"
+                    PhotoPat = "null"
                 }
 
-                );
+                );*/
         }
     }
 }

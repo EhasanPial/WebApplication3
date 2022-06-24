@@ -1,15 +1,16 @@
-﻿@model Employee
+﻿
+@model EmployeeEditViewModel
 
 
 @{
-    ViewBag.Title = "Create Employee";
+    ViewBag.Title = "Edit Employee";
 }
 
 
-<form asp-controller="home" asp-action="create" method="post" class="mt-3">
-    <input asp-for="PhotoPath" value="null" />
+<form asp-controller="home" asp-action="edit" method="post" class="mt-3">
+    <input hidden asp-for="Id"/>
+    <input hidden asp-for="PhotoPath" value="null" />
     <div class="form-group row">
-        
         <label asp-for="Name" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
             <input asp-for="Name" class="form-control" placeholder="Name">
@@ -36,7 +37,9 @@
 
     <div class="form-group row">
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-action="index" asp-controller="Home"class="btn btn-primary" >
+                Cancel</a>
         </div>
     </div>
 </form>
