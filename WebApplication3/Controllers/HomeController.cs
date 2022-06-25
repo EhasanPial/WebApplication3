@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApplication3.Models;
 using WebApplication3.ViewModels;
 
 namespace WebApplication3.wwwroot.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     public class HomeController : Controller
     {
@@ -20,6 +22,7 @@ namespace WebApplication3.wwwroot.Controllers
         [Route("~/")] // "localhost:5000/"   // root of website
         [Route("")] // "localhost:5000/home" [Route("/Home")]  
         [Route("[action]")]  // localhost:5000/home/index
+        [AllowAnonymous]
         public ViewResult Index()
         {
             var model = _employeeRepository.GetAll();
@@ -27,7 +30,7 @@ namespace WebApplication3.wwwroot.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [Route("Details/{id?}")]
         // Controller Builds the model er por eta view e pathabe
         public ViewResult Details(int? id)
@@ -63,6 +66,8 @@ namespace WebApplication3.wwwroot.Controllers
 
         [Route("Create")]
         [HttpGet]
+        [Authorize]
+
         public ViewResult Create()
         {
             return View();
@@ -70,6 +75,7 @@ namespace WebApplication3.wwwroot.Controllers
 
         [Route("Create")]
         [HttpPost]
+        [Authorize]
         public IActionResult Create(Employee employee)
         {
             if (ModelState.IsValid)
@@ -86,6 +92,9 @@ namespace WebApplication3.wwwroot.Controllers
 
         [Route("Edit")]
         [HttpGet]
+        [Authorize]
+
+
         public ViewResult Edit(int id)
         {
             Employee employee = _employeeRepository.GetEmployee(id);
@@ -95,8 +104,8 @@ namespace WebApplication3.wwwroot.Controllers
                 Name = employee.Name,
                 Email = employee.Email,
                 Department = employee.Department,
-                PhotoPath  = employee.PhotoPath
-                
+                PhotoPath = employee.PhotoPath
+
             };
             return View(editViewModel);
         }
@@ -104,6 +113,8 @@ namespace WebApplication3.wwwroot.Controllers
 
         [Route("Edit")]
         [HttpPost]
+        [Authorize]
+
         public IActionResult Edit(EmployeeEditViewModel model)
         {
             if (ModelState.IsValid)
@@ -114,10 +125,10 @@ namespace WebApplication3.wwwroot.Controllers
                 employee.Department = model.Department;
                 employee.PhotoPath = model.PhotoPath;
                 employee.Name = model.Name;
- 
+
                 _employeeRepository.Update(employee);
                 return RedirectToAction("index", new { id = employee.Id });
-                
+
             }
 
             return View();

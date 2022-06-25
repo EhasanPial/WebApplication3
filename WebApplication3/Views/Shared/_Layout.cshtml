@@ -1,5 +1,6 @@
-﻿ 
-<!DOCTYPE html> 
+﻿@inject SignInManager<ApplicationUser> signInManger;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -9,7 +10,7 @@
         naki amr project e wwwroot e jeta ache ota.*@
     @*jQuery age load hoite hobe then bootstrap.js*@
 
-     <link rel="stylesheet"
+    <link rel="stylesheet"
           href="~/lib/bootstrap/css/bootstrap.css" />
     <script src="wwwroot/lib/jquery/jquery.js"></script>
     <script src="wwwroot/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -60,7 +61,42 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Home" asp-action="Create">Create</a>
                     </li>
-                     
+                    @if (signInManger.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a href="#">
+                                Manage Roles
+                            </a>
+                        </li>
+
+                    }
+
+
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    @*  LOG OUT CODE*@
+                    @if (signInManger.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <form method="post" asp-action="logout"
+                              asp-controller="account">
+                                <button type="submit" class="nav-link btn btn-link py-0"
+                                    style="width:auto">
+                                    Logout @User.Identity.Name
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link " asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-controller="Account" asp-action="login">Login</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </nav>

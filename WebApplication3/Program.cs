@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using WebApplication3.Models;
 
@@ -14,18 +16,46 @@ var connectionString = builder.Configuration.GetConnectionString("EmployeeDBConn
 builder.Services.AddDbContextPool<AppDbContext>(x => x.UseSqlServer(connectionString));
 
 // Identity Service
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option =>
+{
+    option.Password.RequiredLength = 4;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireDigit = false;
+    option.Password.RequiredUniqueChars = 3;
+    option.Password.RequireLowercase = false;
+    option.Password.RequireUppercase = false;
+}).AddEntityFrameworkStores<AppDbContext>();
+
+// Password Options
+
+/*builder.Services.Configure<IdentityOptions>(option =>
+{
+    option.Password.RequiredLength = 4;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireDigit = false;
+    option.Password.RequiredUniqueChars = 3;
+});*/
+
+builder.Services.AddMvc(config => {
+    var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
+});
 
 var app = builder.Build();
 
 // +++--------------- Configure ---------------++++ //
 
 app.UseStaticFiles();
-app.UseAuthentication();
-app.UseMvc();
 app.UseRouting();
-app.MapControllers(); // for attribute routing
+app.MapControllers();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+
+// for attribute routing
 
 
 // for conventional routing
