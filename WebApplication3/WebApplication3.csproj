@@ -43,6 +43,8 @@
 
   <ItemGroup>
     <None Include="wwwroot\css\site.css" />
+    <None Include="wwwroot\Fonts\icomoon\demo-files\demo.js" />
+    <None Include="wwwroot\Fonts\icomoon\fonts\icomoon.svg" />
     <None Include="wwwroot\images\dog.jpg" />
     <None Include="wwwroot\js\CustomJavaScript.js" />
   </ItemGroup>
